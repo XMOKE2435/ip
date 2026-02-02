@@ -34,6 +34,36 @@ public class Xmoke {
                 continue;
             }
 
+            if (input.trim().equals("delete")) {
+                printError("OOPS!!! Please provide a task number to delete.");
+                continue;
+            }
+            if (input.trim().startsWith("delete ")) {
+                int index = parseIndex(input.trim().substring("delete ".length()), taskCount);
+                if (index != -1) {
+                    System.out.println(LINE_SEPARATOR);
+                    System.out.println("Noted. I've removed this task:");
+                    System.out.println("  [" + types[index] + "]" + checkStatus(isDone[index]) + " " + tasks[index]);
+
+                    for (int i = index; i < taskCount - 1; i++) {
+                        tasks[i] = tasks[i + 1];
+                        isDone[i] = isDone[i + 1];
+                        types[i] = types[i + 1];
+                    }
+
+                    tasks[taskCount - 1] = null;
+                    isDone[taskCount - 1] = false;
+                    types[taskCount - 1] = null;
+
+                    taskCount--;
+
+                    System.out.println("Now you have " + taskCount + " tasks in the list.");
+                    System.out.println(LINE_SEPARATOR);
+                }
+                continue;
+            }
+
+
             if (input.trim().equals("mark")) {
                 printError("OOPS!!! Please provide a task number to mark.");
                 continue;
@@ -165,13 +195,17 @@ public class Xmoke {
         try {
             oneBasedIndex = Integer.parseInt(trimmed);
         } catch (NumberFormatException e) {
+            System.out.println(LINE_SEPARATOR);
             System.out.println("OOPS!!! Please provide a valid task number.");
+            System.out.println(LINE_SEPARATOR);
             return -1;
         }
 
         int zeroBasedIndex = oneBasedIndex - 1;
         if (zeroBasedIndex < 0 || zeroBasedIndex >= taskCount) {
+            System.out.println(LINE_SEPARATOR);
             System.out.println("OOPS!!! That task number is out of range.");
+            System.out.println(LINE_SEPARATOR);
             return -1;
         }
 
