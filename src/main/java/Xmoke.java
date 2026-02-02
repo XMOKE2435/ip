@@ -33,6 +33,11 @@ public class Xmoke {
                 System.out.println(LINE_SEPARATOR);
                 continue;
             }
+
+            if (input.trim().equals("mark")) {
+                printError("OOPS!!! Please provide a task number to mark.");
+                continue;
+            }
             if (input.trim().startsWith("mark ")) {
                 int index = parseIndex(input.trim().substring("mark ".length()), taskCount);
                 if (index != -1) {
@@ -42,6 +47,11 @@ public class Xmoke {
                     System.out.println("  [" + types[index] + "][X]" + " " + tasks[index]);
                     System.out.println(LINE_SEPARATOR);
                 }
+                continue;
+            }
+
+            if (input.trim().equals("unmark")) {
+                printError("OOPS!!! Please provide a task number to unmark.");
                 continue;
             }
             if (input.trim().startsWith("unmark ")) {
@@ -59,8 +69,17 @@ public class Xmoke {
                 System.out.println("I can't take it anymore!");
                 continue;
             }
+
+            if (input.trim().equals("todo")) {
+                printError("OOPS!!! The description of a todo cannot be empty.");
+                continue;
+            }
             if (input.trim().startsWith("todo ")) {
                 String description = input.trim().substring("todo ".length()).trim();
+                if (description.isEmpty()) {
+                    printError("OOPS!!! The description of a todo cannot be empty.");
+                    continue;
+                }
                 tasks[taskCount] = description;
                 isDone[taskCount] = false;
                 types[taskCount] = "T";
@@ -73,9 +92,14 @@ public class Xmoke {
                 System.out.println(LINE_SEPARATOR);
                 continue;
             }
+
             if (input.trim().startsWith("deadline ")) {
                 String remainder = input.trim().substring("deadline ".length()).trim();
                 String[] parts = remainder.split(" /by ", 2);
+                if (parts.length < 2) {
+                    printError("OOPS!!! A deadline must have /by followed by a time.");
+                    continue;
+                }
                 String deadline = parts[1].trim();
                 String description = parts[0].trim() + " (by: " + deadline + ")";
                 tasks[taskCount] = description;
@@ -90,6 +114,7 @@ public class Xmoke {
                 System.out.println(LINE_SEPARATOR);
                 continue;
             }
+
             if (input.trim().startsWith("event ")) {
                 String remainder = input.trim().substring("event ".length()).trim();
                 String[] firstSplit = remainder.split(" /from ", 2);
@@ -128,7 +153,7 @@ public class Xmoke {
                 System.out.println(LINE_SEPARATOR);
                 continue;
             }
-
+            printError("OOPS!!! I'm sorry, but I don't know what that means :-(");
         }
         scanner.close();
     }
@@ -158,4 +183,10 @@ public class Xmoke {
         }
         return "[ ]";
     }
+    private static void printError(String message) {
+        System.out.println(LINE_SEPARATOR);
+        System.out.println(message);
+        System.out.println(LINE_SEPARATOR);
+    }
+
 }
