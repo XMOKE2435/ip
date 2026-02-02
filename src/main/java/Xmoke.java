@@ -1,4 +1,9 @@
 import java.util.Scanner;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.List;
 
 public class Xmoke {
     private static final String LINE_SEPARATOR = "____________________________________________________________";
@@ -6,6 +11,8 @@ public class Xmoke {
     private enum TaskType {
         T, D, E
     }
+    private static final Path DATA_FOLDER_PATH = Paths.get("data");
+    private static final Path DATA_FILE_PATH = DATA_FOLDER_PATH.resolve("XMOKE.txt");
 
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
@@ -13,6 +20,8 @@ public class Xmoke {
         int taskCount = 0;
         boolean[] isDone = new boolean[MAX_TASKS];
         TaskType[] types = new TaskType[MAX_TASKS];
+        ensureDataFileExists();
+        taskCount = loadTasks(tasks, isDone, types);
 
         System.out.println(LINE_SEPARATOR);
         System.out.println("Hello! I'm XMOKE");
@@ -59,6 +68,7 @@ public class Xmoke {
                     types[taskCount - 1] = null;
 
                     taskCount--;
+                    saveTasks(tasks, isDone, types, taskCount);
 
                     System.out.println("Now you have " + taskCount + " tasks in the list.");
                     System.out.println(LINE_SEPARATOR);
@@ -76,6 +86,7 @@ public class Xmoke {
                 if (index != -1) {
                     System.out.println(LINE_SEPARATOR);
                     isDone[index] = true;
+                    saveTasks(tasks, isDone, types, taskCount);
                     System.out.println("Nice! I've marked this task as done:");
                     System.out.println("  [" + types[index] + "][X]" + " " + tasks[index]);
                     System.out.println(LINE_SEPARATOR);
@@ -92,6 +103,7 @@ public class Xmoke {
                 if (index != -1) {
                     System.out.println(LINE_SEPARATOR);
                     isDone[index] = false;
+                    saveTasks(tasks, isDone, types, taskCount);
                     System.out.println("Nice! I've marked this task as not done yet:");
                     System.out.println("  [" + types[index] + "][ ]" + " " + tasks[index]);
                     System.out.println(LINE_SEPARATOR);
@@ -117,6 +129,7 @@ public class Xmoke {
                 isDone[taskCount] = false;
                 types[taskCount] = TaskType.T;
                 taskCount++;
+                saveTasks(tasks, isDone, types, taskCount);
 
                 System.out.println(LINE_SEPARATOR);
                 System.out.println("Got it. I've added this task:");
@@ -139,6 +152,7 @@ public class Xmoke {
                 isDone[taskCount] = false;
                 types[taskCount] = TaskType.D;
                 taskCount++;
+                saveTasks(tasks, isDone, types, taskCount);
 
                 System.out.println(LINE_SEPARATOR);
                 System.out.println("Got it. I've added this task:");
@@ -161,7 +175,7 @@ public class Xmoke {
                 String[] secondSplit = firstSplit[1].split(" /to ", 2);
 
                 if (secondSplit.length < 2) {
-                    System.out.println("OOPS!!! An event must have /to.");
+                    printError("OOPS!!! An event must have /to.");
                     continue;
                 }
 
@@ -169,7 +183,7 @@ public class Xmoke {
                 String toTime = secondSplit[1].trim();
 
                 if (descriptionPart.isEmpty() || fromTime.isEmpty() || toTime.isEmpty()) {
-                    System.out.println("OOPS!!! The description/from/to of an event cannot be empty.");
+                    printError("OOPS!!! The description/from/to of an event cannot be empty.");
                     continue;
                 }
 
@@ -178,6 +192,7 @@ public class Xmoke {
                 isDone[taskCount] = false;
                 types[taskCount] = TaskType.E;
                 taskCount++;
+                saveTasks(tasks, isDone, types, taskCount);
 
                 System.out.println(LINE_SEPARATOR);
                 System.out.println("Got it. I've added this task:");
@@ -222,4 +237,70 @@ public class Xmoke {
         System.out.println(LINE_SEPARATOR);
     }
 
+    private static void ensureDataFileExists() {
+        try {
+            Files.createDirectories(DATA_FOLDER_PATH);
+            if (Files.notExists(DATA_FILE_PATH)) {
+                Files.createFile(DATA_FILE_PATH);
+            }
+        } catch (IOException e) {
+            printError("OOPS!!! I couldn't set up the data file: " + e.getMessage());
+        }
+    }
+
+    private static int loadTasks(String[] tasks, boolean[] isDone, TaskType[] types) {
+        int taskCount = 0;
+
+        try {
+            List<String> lines = Files.readAllLines(DATA_FILE_PATH);
+            for (String line : lines) {
+                if (line.trim().isEmpty()) {
+                    continue;
+                }
+
+                String[] parts = line.split("\\|", 3);
+                if (parts.length < 3) {
+                    continue;
+                }
+
+                TaskType type;
+                try {
+                    type = TaskType.valueOf(parts[0].trim());
+                } catch (IllegalArgumentException e) {
+                    continue; // corrupted type
+                }
+
+                String doneFlag = parts[1].trim();
+                boolean done = doneFlag.equals("1");
+
+                String description = parts[2].trim();
+
+                if (taskCount >= MAX_TASKS) {
+                    break;
+                }
+
+                types[taskCount] = type;
+                isDone[taskCount] = done;
+                tasks[taskCount] = description;
+                taskCount++;
+            }
+        } catch (IOException e) {
+            printError("OOPS!!! I couldn't load saved data: " + e.getMessage());
+        }
+
+        return taskCount;
+    }
+
+    private static void saveTasks(String[] tasks, boolean[] isDone, TaskType[] types, int taskCount) {
+        try {
+            StringBuilder content = new StringBuilder();
+            for (int i = 0; i < taskCount; i++) {
+                String doneFlag = isDone[i] ? "1" : "0";
+                content.append(types[i]).append("|").append(doneFlag).append("|").append(tasks[i]).append("\n");
+            }
+            Files.writeString(DATA_FILE_PATH, content.toString());
+        } catch (IOException e) {
+            printError("OOPS!!! I couldn't save data: " + e.getMessage());
+        }
+    }
 }
