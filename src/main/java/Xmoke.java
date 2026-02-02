@@ -3,13 +3,16 @@ import java.util.Scanner;
 public class Xmoke {
     private static final String LINE_SEPARATOR = "____________________________________________________________";
     private static final int MAX_TASKS = 100;
+    private enum TaskType {
+        T, D, E
+    }
 
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         String[] tasks = new String[MAX_TASKS];
         int taskCount = 0;
         boolean[] isDone = new boolean[MAX_TASKS];
-        String[] types = new String[MAX_TASKS];
+        TaskType[] types = new TaskType[MAX_TASKS];
 
         System.out.println(LINE_SEPARATOR);
         System.out.println("Hello! I'm XMOKE");
@@ -112,7 +115,7 @@ public class Xmoke {
                 }
                 tasks[taskCount] = description;
                 isDone[taskCount] = false;
-                types[taskCount] = "T";
+                types[taskCount] = TaskType.T;
                 taskCount++;
 
                 System.out.println(LINE_SEPARATOR);
@@ -134,7 +137,7 @@ public class Xmoke {
                 String description = parts[0].trim() + " (by: " + deadline + ")";
                 tasks[taskCount] = description;
                 isDone[taskCount] = false;
-                types[taskCount] = "D";
+                types[taskCount] = TaskType.D;
                 taskCount++;
 
                 System.out.println(LINE_SEPARATOR);
@@ -150,7 +153,7 @@ public class Xmoke {
                 String[] firstSplit = remainder.split(" /from ", 2);
 
                 if (firstSplit.length < 2) {
-                    System.out.println("OOPS!!! An event must have /from and /to.");
+                    printError("OOPS!!! An event must have /from and /to.");
                     continue;
                 }
 
@@ -173,7 +176,7 @@ public class Xmoke {
                 String description = descriptionPart + " (from: " + fromTime + "; to: " + toTime + ")";
                 tasks[taskCount] = description;
                 isDone[taskCount] = false;
-                types[taskCount] = "E";
+                types[taskCount] = TaskType.E;
                 taskCount++;
 
                 System.out.println(LINE_SEPARATOR);
@@ -195,17 +198,13 @@ public class Xmoke {
         try {
             oneBasedIndex = Integer.parseInt(trimmed);
         } catch (NumberFormatException e) {
-            System.out.println(LINE_SEPARATOR);
-            System.out.println("OOPS!!! Please provide a valid task number.");
-            System.out.println(LINE_SEPARATOR);
+            printError("OOPS!!! Please provide a valid task number.");
             return -1;
         }
 
         int zeroBasedIndex = oneBasedIndex - 1;
         if (zeroBasedIndex < 0 || zeroBasedIndex >= taskCount) {
-            System.out.println(LINE_SEPARATOR);
-            System.out.println("OOPS!!! That task number is out of range.");
-            System.out.println(LINE_SEPARATOR);
+            printError("OOPS!!! That task number is out of range.");
             return -1;
         }
 
