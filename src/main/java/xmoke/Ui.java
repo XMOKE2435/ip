@@ -89,6 +89,15 @@ public class Ui {
         System.out.println(LINE_SEPARATOR);
     }
 
+    public void showFoundTasks(ArrayList<Task> found) {
+        System.out.println(LINE_SEPARATOR);
+        System.out.println("Here are the matching tasks in your list:");
+        for (int i = 0; i < found.size(); i++) {
+            System.out.println((i + 1) + "." + found.get(i));
+        }
+        System.out.println(LINE_SEPARATOR);
+    }
+
     public String readCommand() {
         return scanner.nextLine();
     }

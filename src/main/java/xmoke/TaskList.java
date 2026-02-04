@@ -60,4 +60,16 @@ public class TaskList {
         }
         return tasksOnDate;
     }
+    public ArrayList<Task> findTasks(String keyword) {
+        ArrayList<Task> matches = new ArrayList<>();
+        String needle = keyword.trim().toLowerCase();
+
+        for (Task task : tasks) {
+            String haystack = task.getDescription().toLowerCase();
+            if (haystack.contains(needle)) {
+                matches.add(task);
+            }
+        }
+        return matches;
+    }
 }

@@ -64,6 +64,21 @@ public class Xmoke {
                 continue;
             }
 
+            if (input.trim().equals("find")) {
+                ui.showError("OOPS!!! Please provide a keyword to find.");
+                continue;
+            }
+
+            if (input.trim().startsWith("find ")) {
+                String keyword = input.trim().substring("find ".length()).trim();
+                if (keyword.isEmpty()) {
+                    ui.showError("OOPS!!! Please provide a keyword to find.");
+                    continue;
+                }
+                ui.showFoundTasks(tasks.findTasks(keyword));
+                continue;
+            }
+
             if (input.trim().equals("mark")) {
                 ui.showError("OOPS!!! Please provide a task number to mark.");
                 continue;
