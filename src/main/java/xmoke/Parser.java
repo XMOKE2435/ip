@@ -1,3 +1,5 @@
+package xmoke;
+
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -11,7 +13,7 @@ public class Parser {
         int zeroBasedIndex = oneBasedIndex - 1;
 
         if (zeroBasedIndex < 0 || zeroBasedIndex >= taskCount) {
-            throw new IndexOutOfBoundsException("Task number is out of range.");
+            throw new IndexOutOfBoundsException("xmoke.Task number is out of range.");
         }
 
         return zeroBasedIndex;

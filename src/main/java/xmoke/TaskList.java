@@ -1,3 +1,5 @@
+package xmoke;
+
 import java.time.LocalDate;
 import java.util.ArrayList;
 
@@ -11,7 +13,7 @@ public class TaskList {
 
     public void addTask(Task task) {
         if (tasks.size() >= MAX_TASKS) {
-            throw new IllegalStateException("Task list is full!");
+            throw new IllegalStateException("xmoke.Task list is full!");
         }
         tasks.add(task);
     }
