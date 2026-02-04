@@ -28,32 +28,26 @@ public class Parser {
     public static LocalDateTime parseDateTime(String dateTimeStr) throws DateTimeParseException {
         dateTimeStr = dateTimeStr.trim();
 
-        // Try format: yyyy-MM-dd HHmm
         try {
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm");
             return LocalDateTime.parse(dateTimeStr, formatter);
         } catch (DateTimeParseException e) {
-            // Continue to next format
         }
 
-        // Try format: yyyy-MM-dd (date only)
         try {
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
             LocalDate date = LocalDate.parse(dateTimeStr, formatter);
             return date.atTime(23, 59); // Default to end of day
         } catch (DateTimeParseException e) {
-            // Continue to next format
+
         }
 
-        // Try format: d/M/yyyy HHmm
         try {
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/M/yyyy HHmm");
             return LocalDateTime.parse(dateTimeStr, formatter);
         } catch (DateTimeParseException e) {
-            // Continue to next format
         }
 
-        // Try format: d/M/yyyy (date only)
         try {
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/M/yyyy");
             LocalDate date = LocalDate.parse(dateTimeStr, formatter);
@@ -63,21 +57,15 @@ public class Parser {
         }
     }
 
-    /**
-     * Parse date from string for searching
-     */
     public static LocalDate parseDate(String dateStr) throws DateTimeParseException {
         dateStr = dateStr.trim();
 
-        // Try format: yyyy-MM-dd
         try {
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
             return LocalDate.parse(dateStr, formatter);
         } catch (DateTimeParseException e) {
-            // Continue to next format
         }
 
-        // Try format: d/M/yyyy
         try {
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/M/yyyy");
             return LocalDate.parse(dateStr, formatter);

@@ -30,7 +30,6 @@ public class Xmoke {
                 continue;
             }
 
-            // New command: view tasks on a specific date
             if (input.trim().startsWith("view ")) {
                 String dateStr = input.trim().substring("view ".length()).trim();
                 try {
