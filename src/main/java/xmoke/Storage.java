@@ -8,6 +8,10 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeParseException;
 import java.util.List;
 
+/**
+ * Handles loading tasks from disk and saving tasks to disk in a simple text-based format.
+ */
+
 public class Storage {
     private static final Path DATA_FOLDER_PATH = Paths.get("data");
     private static final Path DATA_FILE_PATH = DATA_FOLDER_PATH.resolve("XMOKE.txt");
@@ -15,6 +19,12 @@ public class Storage {
     public Storage() {
         ensureDataFileExists();
     }
+
+    /**
+     * Ensures the data folder and data file exist. Creates them if missing.
+     *
+     * @throws IOException If folder/file creation fails.
+     */
 
     private void ensureDataFileExists() {
         try {
@@ -26,6 +36,13 @@ public class Storage {
             System.out.println("OOPS!!! I couldn't set up the data file: " + e.getMessage());
         }
     }
+
+    /**
+     * Loads tasks from the data file.
+     *
+     * @return A list of tasks loaded from disk.
+     * @throws IOException If reading the file fails.
+     */
 
     public TaskList loadTasks() {
         TaskList taskList = new TaskList();
@@ -70,6 +87,13 @@ public class Storage {
 
         return taskList;
     }
+
+    /**
+     * Saves the given tasks to disk.
+     *
+     * @param tasks Tasks to be saved.
+     * @throws IOException If writing to the file fails.
+     */
 
     public void saveTasks(TaskList taskList) {
         try {

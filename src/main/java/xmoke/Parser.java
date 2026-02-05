@@ -5,7 +5,21 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
+/**
+ * Parses user input into commands and extracts parameters such as task indexes and date/time values.
+ */
+
 public class Parser {
+
+    /**
+     * Parses a 1-based task index from the input and converts it into a 0-based index.
+     *
+     * @param input The full user input.
+     * @param prefixLength Length of the command prefix to skip.
+     * @param taskCount Number of tasks currently in the list.
+     * @return The 0-based task index.
+     * @throws IllegalArgumentException If the index is missing, invalid, or out of range.
+     */
 
     public static int parseTaskIndex(String indexText, int taskCount) throws NumberFormatException {
         String trimmed = indexText.trim();
