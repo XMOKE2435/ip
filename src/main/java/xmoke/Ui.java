@@ -93,6 +93,7 @@ public class Ui {
         System.out.println(LINE_SEPARATOR);
     }
 
+<<<<<<< HEAD
     public void showFoundTasks(ArrayList<Task> found) {
         System.out.println(LINE_SEPARATOR);
         System.out.println("Here are the matching tasks in your list:");
@@ -102,6 +103,15 @@ public class Ui {
         System.out.println(LINE_SEPARATOR);
     }
 
+=======
+    public void showCheer(String quote) {
+        System.out.println(LINE_SEPARATOR);
+        System.out.println(quote);
+        System.out.println(LINE_SEPARATOR);
+    }
+
+
+>>>>>>> branch-A-Cheer
     public String readCommand() {
         return scanner.nextLine();
     }

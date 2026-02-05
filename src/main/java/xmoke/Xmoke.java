@@ -38,6 +38,11 @@ public class Xmoke {
                 continue;
             }
 
+            if (input.trim().equals("cheer")) {
+                ui.showCheer(storage.getRandomCheerQuote());
+                continue;
+            }
+
             if (input.trim().startsWith("view ")) {
                 String dateStr = input.trim().substring("view ".length()).trim();
                 try {
