@@ -34,6 +34,7 @@ public class Parser {
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm");
             return LocalDateTime.parse(dateTimeStr, formatter);
         } catch (DateTimeParseException e) {
+            // Try the next format.
         }
 
         try {
@@ -41,13 +42,14 @@ public class Parser {
             LocalDate date = LocalDate.parse(dateTimeStr, formatter);
             return date.atTime(23, 59); // Default to end of day
         } catch (DateTimeParseException e) {
-
+            // Try the next format.
         }
 
         try {
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/M/yyyy HHmm");
             return LocalDateTime.parse(dateTimeStr, formatter);
         } catch (DateTimeParseException e) {
+            // Try the next format.
         }
 
         try {
@@ -66,6 +68,7 @@ public class Parser {
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
             return LocalDate.parse(dateStr, formatter);
         } catch (DateTimeParseException e) {
+            // Try the next format.
         }
 
         try {
