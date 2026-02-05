@@ -11,6 +11,7 @@ import java.util.List;
 public class Storage {
     private static final Path DATA_FOLDER_PATH = Paths.get("data");
     private static final Path DATA_FILE_PATH = DATA_FOLDER_PATH.resolve("XMOKE.txt");
+    private static final Path CHEER_FILE_PATH = DATA_FOLDER_PATH.resolve("cheer.txt");
 
     public Storage() {
         ensureDataFileExists();
@@ -21,6 +22,9 @@ public class Storage {
             Files.createDirectories(DATA_FOLDER_PATH);
             if (Files.notExists(DATA_FILE_PATH)) {
                 Files.createFile(DATA_FILE_PATH);
+            }
+            if (Files.notExists(CHEER_FILE_PATH)) {
+                Files.createFile(CHEER_FILE_PATH);
             }
         } catch (IOException e) {
             System.out.println("OOPS!!! I couldn't set up the data file: " + e.getMessage());
@@ -82,4 +86,21 @@ public class Storage {
             System.out.println("OOPS!!! I couldn't save data: " + e.getMessage());
         }
     }
+
+    public String getRandomCheerQuote() {
+        try {
+            List<String> lines = Files.readAllLines(CHEER_FILE_PATH);
+            lines.removeIf(s -> s.trim().isEmpty());
+
+            if (lines.isEmpty()) {
+                return "Keep going — you’re doing great!";
+            }
+
+            int index = (int) (Math.random() * lines.size());
+            return lines.get(index);
+        } catch (IOException e) {
+            return "Keep going — you’re doing great!";
+        }
+    }
+
 }

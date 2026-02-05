@@ -89,6 +89,13 @@ public class Ui {
         System.out.println(LINE_SEPARATOR);
     }
 
+    public void showCheer(String quote) {
+        System.out.println(LINE_SEPARATOR);
+        System.out.println(quote);
+        System.out.println(LINE_SEPARATOR);
+    }
+
+
     public String readCommand() {
         return scanner.nextLine();
     }
