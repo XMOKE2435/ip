@@ -5,6 +5,12 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 
+/**
+ * Entry point of the XMOKE chatbot application.
+ * Handles the program startup flow and delegates user interactions to other components.
+ */
+
+
 public class Xmoke {
     private Storage storage;
     private TaskList tasks;
@@ -210,6 +216,12 @@ public class Xmoke {
 
         ui.close();
     }
+
+    /**
+     * Runs the XMOKE chatbot.
+     *
+     * @param args Command-line arguments (not used).
+     */
 
     public static void main(String[] args) {
         new Xmoke().run();

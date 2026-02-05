@@ -3,6 +3,11 @@ package xmoke;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
+/**
+ * Stores and manages a collection of tasks.
+ * Provides operations such as add, delete, list, and find.
+ */
+
 public class TaskList {
     private ArrayList<Task> tasks;
     private static final int MAX_TASKS = 100;

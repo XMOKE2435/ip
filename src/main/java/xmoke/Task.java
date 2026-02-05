@@ -4,6 +4,11 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Locale;
 
+/**
+ * Represents a task in the chatbot, including its type, description, completion status,
+ * and optional date/time fields (deadline or event timing).
+ */
+
 public class Task {
     public enum TaskType {
         T, D, E
