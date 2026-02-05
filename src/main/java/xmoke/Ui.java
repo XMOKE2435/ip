@@ -8,10 +8,9 @@ import java.util.Scanner;
 /**
  * Handles all user-facing output messages for the chatbot.
  */
-
 public class Ui {
     private static final String LINE_SEPARATOR = "____________________________________________________________";
-    private Scanner scanner;
+    private final Scanner scanner;
 
     public Ui() {
         this.scanner = new Scanner(System.in);
@@ -31,6 +30,20 @@ public class Ui {
     }
 
     public void showLine() {
+        System.out.println(LINE_SEPARATOR);
+    }
+
+    public void showLogo() {
+        String logo =
+                "__  __ __  __  ___  _  __ _____\n"
+                        + "\\ \\/ /|  \\/  |/ _ \\| |/ /| ____|\n"
+                        + " \\  / | |\\/| | | | | ' / |  _|\n"
+                        + " /  \\ | |  | | |_| | . \\ | |___\n"
+                        + "/_/\\_\\|_|  |_|\\___/|_|\\_\\|_____|\n";
+
+        System.out.println(LINE_SEPARATOR);
+        System.out.println("Hello from");
+        System.out.println(logo);
         System.out.println(LINE_SEPARATOR);
     }
 
@@ -93,25 +106,21 @@ public class Ui {
         System.out.println(LINE_SEPARATOR);
     }
 
-<<<<<<< HEAD
-    public void showFoundTasks(ArrayList<Task> found) {
+    public void showFoundTasks(ArrayList<Task> foundTasks) {
         System.out.println(LINE_SEPARATOR);
         System.out.println("Here are the matching tasks in your list:");
-        for (int i = 0; i < found.size(); i++) {
-            System.out.println((i + 1) + "." + found.get(i));
+        for (int i = 0; i < foundTasks.size(); i++) {
+            System.out.println((i + 1) + "." + foundTasks.get(i));
         }
         System.out.println(LINE_SEPARATOR);
     }
 
-=======
     public void showCheer(String quote) {
         System.out.println(LINE_SEPARATOR);
         System.out.println(quote);
         System.out.println(LINE_SEPARATOR);
     }
 
-
->>>>>>> branch-A-Cheer
     public String readCommand() {
         return scanner.nextLine();
     }

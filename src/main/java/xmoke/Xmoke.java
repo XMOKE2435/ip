@@ -23,6 +23,7 @@ public class Xmoke {
     }
 
     public void run() {
+        ui.showLogo();
         ui.showWelcome();
 
         while (true) {
