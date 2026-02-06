@@ -29,10 +29,6 @@ public class Ui {
         System.out.println(LINE_SEPARATOR);
     }
 
-    public void showLine() {
-        System.out.println(LINE_SEPARATOR);
-    }
-
     public void showLogo() {
         String logo =
                 "__  __ __  __  ___  _  __ _____\n"

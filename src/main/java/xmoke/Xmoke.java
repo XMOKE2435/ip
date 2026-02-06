@@ -44,18 +44,6 @@ public class Xmoke {
                 continue;
             }
 
-            if (input.trim().startsWith("view ")) {
-                String dateStr = input.trim().substring("view ".length()).trim();
-                try {
-                    LocalDate date = Parser.parseDate(dateStr);
-                    ArrayList<Task> tasksOnDate = tasks.getTasksOnDate(date);
-                    ui.showTasksOnDate(tasksOnDate, date);
-                } catch (DateTimeParseException e) {
-                    ui.showError("OOPS!!! Invalid date format. Use yyyy-MM-dd or d/M/yyyy");
-                }
-                continue;
-            }
-
             if (input.trim().equals("delete")) {
                 ui.showError("OOPS!!! Please provide a task number to delete.");
                 continue;

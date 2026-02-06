@@ -69,7 +69,7 @@ public class Parser {
         try {
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/M/yyyy");
             LocalDate date = LocalDate.parse(dateTimeStr, formatter);
-            return date.atTime(23, 59); // Default to end of day
+            return date.atTime(23, 59);
         } catch (DateTimeParseException e) {
             throw new DateTimeParseException("Unable to parse date/time: " + dateTimeStr, dateTimeStr, 0);
         }
