@@ -9,6 +9,7 @@ import org.junit.jupiter.api.Test;
 
 public class TaskTest {
 
+    // Positive: verifies marking a todo as done updates status icon and file format correctly.
     @Test
     public void markAndFileFormat_doneTask_success() {
         Task task = new Task("read book", Task.TaskType.T);
@@ -19,6 +20,7 @@ public class TaskTest {
         assertEquals("T|1|read book", task.toFileFormat());
     }
 
+    // Positive: verifies a deadline task with date/time formats correctly in toString and toFileFormat().
     @Test
     public void toString_deadlineWithDateTime_formatsCorrectly() {
         LocalDateTime dt = LocalDateTime.of(2019, 12, 2, 18, 0);
