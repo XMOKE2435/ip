@@ -16,17 +16,20 @@ public class Ui {
         this.scanner = new Scanner(System.in);
     }
 
+    public String getWelcomeMessage() {
+        return LINE_SEPARATOR + "\nHello! I'm XMOKE\nWhat can I do for you?\n" + LINE_SEPARATOR + "\n";
+    }
+
     public void showWelcome() {
-        System.out.println(LINE_SEPARATOR);
-        System.out.println("Hello! I'm XMOKE");
-        System.out.println("What can I do for you?");
-        System.out.println(LINE_SEPARATOR);
+        System.out.print(getWelcomeMessage());
+    }
+
+    public String getGoodbyeMessage() {
+        return LINE_SEPARATOR + "\nBye. Hope to see you again soon!\n" + LINE_SEPARATOR + "\n";
     }
 
     public void showGoodbye() {
-        System.out.println(LINE_SEPARATOR);
-        System.out.println("Bye. Hope to see you again soon!");
-        System.out.println(LINE_SEPARATOR);
+        System.out.print(getGoodbyeMessage());
     }
 
     public void showLogo() {
@@ -43,78 +46,102 @@ public class Ui {
         System.out.println(LINE_SEPARATOR);
     }
 
+    public String getErrorMessage(String message) {
+        return LINE_SEPARATOR + "\n" + message + "\n" + LINE_SEPARATOR + "\n";
+    }
+
     public void showError(String message) {
-        System.out.println(LINE_SEPARATOR);
-        System.out.println(message);
-        System.out.println(LINE_SEPARATOR);
+        System.out.print(getErrorMessage(message));
+    }
+
+    public String getTaskListMessage(TaskList taskList) {
+        StringBuilder sb = new StringBuilder();
+        sb.append(LINE_SEPARATOR).append("\nHere are the tasks in your list:\n");
+        for (int i = 0; i < taskList.size(); i++) {
+            sb.append((i + 1)).append(".").append(taskList.getTask(i)).append("\n");
+        }
+        sb.append(LINE_SEPARATOR).append("\n");
+        return sb.toString();
     }
 
     public void showTaskList(TaskList taskList) {
-        System.out.println(LINE_SEPARATOR);
-        System.out.println("Here are the tasks in your list:");
-        for (int i = 0; i < taskList.size(); i++) {
-            System.out.println((i + 1) + "." + taskList.getTask(i));
-        }
-        System.out.println(LINE_SEPARATOR);
+        System.out.print(getTaskListMessage(taskList));
+    }
+
+    public String getTaskAddedMessage(Task task, int taskCount) {
+        return LINE_SEPARATOR + "\nGot it. I've added this task:\n" + task + "\n"
+                + "Now you have " + taskCount + " tasks in the list.\n" + LINE_SEPARATOR + "\n";
     }
 
     public void showTaskAdded(Task task, int taskCount) {
-        System.out.println(LINE_SEPARATOR);
-        System.out.println("Got it. I've added this task:");
-        System.out.println(task);
-        System.out.println("Now you have " + taskCount + " tasks in the list.");
-        System.out.println(LINE_SEPARATOR);
+        System.out.print(getTaskAddedMessage(task, taskCount));
+    }
+
+    public String getTaskDeletedMessage(Task task, int taskCount) {
+        return LINE_SEPARATOR + "\nNoted. I've removed this task:\n  " + task + "\n"
+                + "Now you have " + taskCount + " tasks in the list.\n" + LINE_SEPARATOR + "\n";
     }
 
     public void showTaskDeleted(Task task, int taskCount) {
-        System.out.println(LINE_SEPARATOR);
-        System.out.println("Noted. I've removed this task:");
-        System.out.println("  " + task);
-        System.out.println("Now you have " + taskCount + " tasks in the list.");
-        System.out.println(LINE_SEPARATOR);
+        System.out.print(getTaskDeletedMessage(task, taskCount));
+    }
+
+    public String getTaskMarkedMessage(Task task) {
+        return LINE_SEPARATOR + "\nNice! I've marked this task as done:\n  " + task + "\n" + LINE_SEPARATOR + "\n";
     }
 
     public void showTaskMarked(Task task) {
-        System.out.println(LINE_SEPARATOR);
-        System.out.println("Nice! I've marked this task as done:");
-        System.out.println("  " + task);
-        System.out.println(LINE_SEPARATOR);
+        System.out.print(getTaskMarkedMessage(task));
+    }
+
+    public String getTaskUnmarkedMessage(Task task) {
+        return LINE_SEPARATOR + "\nNice! I've marked this task as not done yet:\n  " + task + "\n" + LINE_SEPARATOR + "\n";
     }
 
     public void showTaskUnmarked(Task task) {
-        System.out.println(LINE_SEPARATOR);
-        System.out.println("Nice! I've marked this task as not done yet:");
-        System.out.println("  " + task);
-        System.out.println(LINE_SEPARATOR);
+        System.out.print(getTaskUnmarkedMessage(task));
+    }
+
+    public String getTasksOnDateMessage(ArrayList<Task> tasks, LocalDate date) {
+        StringBuilder sb = new StringBuilder();
+        sb.append(LINE_SEPARATOR).append("\n");
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMM d yyyy");
+        if (tasks.isEmpty()) {
+            sb.append("No tasks found on ").append(date.format(formatter)).append("\n");
+        } else {
+            sb.append("Tasks on ").append(date.format(formatter)).append(":\n");
+            for (int i = 0; i < tasks.size(); i++) {
+                sb.append((i + 1)).append(".").append(tasks.get(i)).append("\n");
+            }
+        }
+        sb.append(LINE_SEPARATOR).append("\n");
+        return sb.toString();
     }
 
     public void showTasksOnDate(ArrayList<Task> tasks, LocalDate date) {
-        System.out.println(LINE_SEPARATOR);
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMM d yyyy");
-        if (tasks.isEmpty()) {
-            System.out.println("No tasks found on " + date.format(formatter));
-        } else {
-            System.out.println("Tasks on " + date.format(formatter) + ":");
-            for (int i = 0; i < tasks.size(); i++) {
-                System.out.println((i + 1) + "." + tasks.get(i));
-            }
+        System.out.print(getTasksOnDateMessage(tasks, date));
+    }
+
+    public String getFoundTasksMessage(ArrayList<Task> foundTasks) {
+        StringBuilder sb = new StringBuilder();
+        sb.append(LINE_SEPARATOR).append("\nHere are the matching tasks in your list:\n");
+        for (int i = 0; i < foundTasks.size(); i++) {
+            sb.append((i + 1)).append(".").append(foundTasks.get(i)).append("\n");
         }
-        System.out.println(LINE_SEPARATOR);
+        sb.append(LINE_SEPARATOR).append("\n");
+        return sb.toString();
     }
 
     public void showFoundTasks(ArrayList<Task> foundTasks) {
-        System.out.println(LINE_SEPARATOR);
-        System.out.println("Here are the matching tasks in your list:");
-        for (int i = 0; i < foundTasks.size(); i++) {
-            System.out.println((i + 1) + "." + foundTasks.get(i));
-        }
-        System.out.println(LINE_SEPARATOR);
+        System.out.print(getFoundTasksMessage(foundTasks));
+    }
+
+    public String getCheerMessage(String quote) {
+        return LINE_SEPARATOR + "\n" + quote + "\n" + LINE_SEPARATOR + "\n";
     }
 
     public void showCheer(String quote) {
-        System.out.println(LINE_SEPARATOR);
-        System.out.println(quote);
-        System.out.println(LINE_SEPARATOR);
+        System.out.print(getCheerMessage(quote));
     }
 
     public String readCommand() {
