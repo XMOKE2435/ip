@@ -11,23 +11,26 @@ import java.time.format.DateTimeParseException;
 
 public class Parser {
 
+    /** Hour and minute used when a date is given without time (end of day). */
+    private static final int DEFAULT_END_OF_DAY_HOUR = 23;
+    private static final int DEFAULT_END_OF_DAY_MINUTE = 59;
+
     /**
      * Parses a 1-based task index from the input and converts it into a 0-based index.
      *
-     * @param input The full user input.
-     * @param prefixLength Length of the command prefix to skip.
+     * @param indexText The index string from the user (e.g. "2").
      * @param taskCount Number of tasks currently in the list.
      * @return The 0-based task index.
-     * @throws IllegalArgumentException If the index is missing, invalid, or out of range.
+     * @throws NumberFormatException If the index is not a valid integer.
+     * @throws IndexOutOfBoundsException If the index is out of range.
      */
-
     public static int parseTaskIndex(String indexText, int taskCount) throws NumberFormatException {
         String trimmed = indexText.trim();
         int oneBasedIndex = Integer.parseInt(trimmed);
         int zeroBasedIndex = oneBasedIndex - 1;
 
         if (zeroBasedIndex < 0 || zeroBasedIndex >= taskCount) {
-            throw new IndexOutOfBoundsException("xmoke.Task number is out of range.");
+            throw new IndexOutOfBoundsException("Task number is out of range.");
         }
         assert zeroBasedIndex >= 0 && zeroBasedIndex < taskCount : "index must be in valid range after check";
 
@@ -55,7 +58,7 @@ public class Parser {
         try {
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
             LocalDate date = LocalDate.parse(dateTimeStr, formatter);
-            return date.atTime(23, 59); // Default to end of day
+            return date.atTime(DEFAULT_END_OF_DAY_HOUR, DEFAULT_END_OF_DAY_MINUTE);
         } catch (DateTimeParseException e) {
             // Try the next format.
         }
@@ -70,7 +73,7 @@ public class Parser {
         try {
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/M/yyyy");
             LocalDate date = LocalDate.parse(dateTimeStr, formatter);
-            return date.atTime(23, 59);
+            return date.atTime(DEFAULT_END_OF_DAY_HOUR, DEFAULT_END_OF_DAY_MINUTE);
         } catch (DateTimeParseException e) {
             throw new DateTimeParseException("Unable to parse date/time: " + dateTimeStr, dateTimeStr, 0);
         }
