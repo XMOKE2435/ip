@@ -20,6 +20,8 @@ public class TaskList {
         if (tasks.size() >= MAX_TASKS) {
             throw new IllegalStateException("xmoke.Task list is full!");
         }
+        assert tasks.size() < MAX_TASKS : "list must not be full when adding";
+        assert task != null : "task to add must not be null";
         tasks.add(task);
     }
 
