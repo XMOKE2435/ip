@@ -32,6 +32,7 @@ public class Parser {
         if (zeroBasedIndex < 0 || zeroBasedIndex >= taskCount) {
             throw new IndexOutOfBoundsException("Task number is out of range.");
         }
+        assert zeroBasedIndex >= 0 && zeroBasedIndex < taskCount : "index must be in valid range after check";
 
         return zeroBasedIndex;
     }
