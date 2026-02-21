@@ -1,44 +1,70 @@
-# xmoke.Xmoke project template
+# XMOKE
 
-This is a masterpiece project for course CS2103DE. It's named after the CS god, XMOKE. Given below are instructions on how to use it.
+A desktop chatbot for managing tasks, built with Java and JavaFX for course CS2103DE. Named after the CS god, XMOKE.
+
+## Features
+
+- **GUI**: Chat-style window; type commands in the text box and press Enter or click Send.
+- **Tasks**: Add todos, deadlines, and events; list, mark, unmark, delete, and find tasks.
+- **Persistence**: Tasks are saved to a data file and loaded when you start the app.
+- **Bye**: Type `bye` to see a goodbye message and close the app.
+
+## Prerequisites
+
+- **JDK 21**
 
 ## Setting up in IntelliJ
 
-Prerequisites: JDK 21.
+1. Open IntelliJ (if you are not in the welcome screen, click `File` > `Close Project` to close the existing project first).
+2. Open the project:
+   - Click `Open`.
+   - Select the project directory, then click `OK`.
+   - Accept the defaults if prompted.
+3. Configure the project to use **JDK 21**: [Set up JDK in IntelliJ](https://www.jetbrains.com/help/idea/sdk.html#set-up-jdk). Set **Project language level** to `SDK default`.
+4. To run the app: run `Launcher` (in `src/main/java/Launcher.java`) — e.g. right-click `Launcher.java` and choose **Run 'Launcher.main()'**. A chat window titled **XMOKE** should open; type in the text box and press Enter or click **Send**.
 
-1. Open IntelliJ (if you are not in the welcome screen, click `File` > `Close Project` to close the existing project first)
-1. Open the project into IntelliJ as follows:
-   1. Click `Open`.
-   1. Select the project directory, and click `OK`.
-   1. If there are any further prompts, accept the defaults.
-1. Configure the project to use **JDK 21** (not other versions) as explained in [here](https://www.jetbrains.com/help/idea/sdk.html#set-up-jdk).<br>
-   In the same dialog, set the **Project language level** field to the `SDK default` option.
-1. After that, locate the `src/main/java/xmoke.Xmoke.java` file, right-click it, and choose `Run xmoke.Xmoke.main()` (if the code editor is showing compile errors, try restarting the IDE). If the setup is correct, you should see something like the below as the output:
-   ```
-Hello from
-__  __ __  __  ___  _  __ _____
-\ \/ /|  \/  |/ _ \| |/ /| ____|
- \  / | |\/| | | | | ' / |  _|
- /  \ | |  | | |_| | . \ | |___
-/_/\_\|_|  |_|\___/|_|\_\|_____|
-   ```
+**Note:** Keep the `src/main/java` folder as the root for Java source files so that tools like Gradle can find them.
 
-**Warning:** Keep the `src\main\java` folder as the root folder for Java files (i.e., don't rename those folders or move Java files to another folder outside of this folder path), as this is the default location some tools (e.g., Gradle) expect to find Java files.
+## Running the app (command line)
 
-## Running Tests
+From the project root:
 
-The project comes with a set of test scripts for different operating systems:
+```bash
+./gradlew run
+```
 
-- **MacOS/Linux**: Run the shell script
-  ```bash
-  cd text-ui-test
-  ./runtest.sh
-  ```
+On Windows:
 
-- **Windows**: Run the batch script
-  ```batch
-  cd text-ui-test
-  runtest.bat
-  ```
+```batch
+gradlew.bat run
+```
 
-These scripts will compile the source files, run the tests, and compare the output against the expected output.
+The GUI window will open. You can also build a runnable JAR:
+
+```bash
+./gradlew shadowJar
+```
+
+The JAR is created in `build/libs/`. Run it with:
+
+```bash
+java -jar build/libs/javafx-tutorial-duke.jar
+```
+
+## Running tests
+
+Unit tests (JUnit 5):
+
+```bash
+./gradlew test
+```
+
+On Windows:
+
+```batch
+gradlew.bat test
+```
+
+## Tech
+
+- Java 21, JavaFX 21 (GUI), Gradle. Main entry point: `Launcher`; GUI: `MainApp` and FXML under `src/main/resources/view/`.
