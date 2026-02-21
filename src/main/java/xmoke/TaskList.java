@@ -2,6 +2,7 @@ package xmoke;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.stream.Collectors;
 
 /**
  * Stores and manages a collection of tasks.
@@ -57,26 +58,15 @@ public class TaskList {
      * Find tasks occurring on a specific date
      */
     public ArrayList<Task> getTasksOnDate(LocalDate date) {
-        ArrayList<Task> tasksOnDate = new ArrayList<>();
-        for (Task task : tasks) {
-            if (task.getDateTime() != null) {
-                if (task.getDateTime().toLocalDate().equals(date)) {
-                    tasksOnDate.add(task);
-                }
-            }
-        }
-        return tasksOnDate;
+        return tasks.stream()
+                .filter(task -> task.getDateTime() != null && task.getDateTime().toLocalDate().equals(date))
+                .collect(Collectors.toCollection(ArrayList::new));
     }
-    public ArrayList<Task> findTasks(String keyword) {
-        ArrayList<Task> matches = new ArrayList<>();
-        String needle = keyword.trim().toLowerCase();
 
-        for (Task task : tasks) {
-            String haystack = task.getDescription().toLowerCase();
-            if (haystack.contains(needle)) {
-                matches.add(task);
-            }
-        }
-        return matches;
+    public ArrayList<Task> findTasks(String keyword) {
+        String needle = keyword.trim().toLowerCase();
+        return tasks.stream()
+                .filter(task -> task.getDescription().toLowerCase().contains(needle))
+                .collect(Collectors.toCollection(ArrayList::new));
     }
 }
