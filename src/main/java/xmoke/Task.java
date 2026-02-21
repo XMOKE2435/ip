@@ -20,6 +20,7 @@ public class Task {
     private LocalDateTime dateTime; // For deadlines and events
 
     public Task(String description, TaskType type) {
+        assert description != null : "task description must not be null";
         this.description = description;
         this.type = type;
         this.isDone = false;
