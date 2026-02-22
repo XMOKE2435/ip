@@ -28,6 +28,7 @@ public class DialogBox extends HBox {
         displayPicture.setFitWidth(100.0);
         displayPicture.setFitHeight(100.0);
         setAlignment(Pos.TOP_RIGHT);
+        dialog.setAlignment(Pos.TOP_RIGHT);
         HBox.setHgrow(dialog, Priority.ALWAYS);
         getChildren().addAll(dialog, displayPicture);
     }
@@ -37,6 +38,7 @@ public class DialogBox extends HBox {
         Collections.reverse(tmp);
         getChildren().setAll(tmp);
         setAlignment(Pos.TOP_LEFT);
+        dialog.setAlignment(Pos.TOP_LEFT);
     }
 
     public static DialogBox getUserDialog(String text, Image img) {
