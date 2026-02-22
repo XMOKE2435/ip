@@ -38,6 +38,12 @@ public class Xmoke {
             return ui.getTaskListMessage(tasks);
         }
 
+        if (input.trim().equalsIgnoreCase("sort")) {
+            tasks.sortByDeadline();
+            storage.saveTasks(tasks);
+            return ui.getSortSuccessMessage() + ui.getTaskListMessage(tasks);
+        }
+
         if (input.trim().equals("cheer")) {
             return ui.getCheerMessage(storage.getRandomCheerQuote());
         }
@@ -200,6 +206,14 @@ public class Xmoke {
             }
 
             if (input.equals("list")) {
+                ui.showTaskList(tasks);
+                continue;
+            }
+
+            if (input.trim().equalsIgnoreCase("sort")) {
+                tasks.sortByDeadline();
+                storage.saveTasks(tasks);
+                ui.showSortSuccess();
                 ui.showTaskList(tasks);
                 continue;
             }

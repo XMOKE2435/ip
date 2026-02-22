@@ -54,6 +54,14 @@ public class Ui {
         System.out.print(getErrorMessage(message));
     }
 
+    public String getSortSuccessMessage() {
+        return LINE_SEPARATOR + "\nTasks sorted by deadline (tasks without deadline at the end).\n" + LINE_SEPARATOR + "\n";
+    }
+
+    public void showSortSuccess() {
+        System.out.print(getSortSuccessMessage());
+    }
+
     public String getTaskListMessage(TaskList taskList) {
         StringBuilder sb = new StringBuilder();
         sb.append(LINE_SEPARATOR).append("\nHere are the tasks in your list:\n");
