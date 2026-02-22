@@ -12,6 +12,7 @@ public class Xmoke {
     private TaskList tasks;
     private Ui ui;
 
+    /** Creates Xmoke with default storage path and loads tasks from disk. */
     public Xmoke() {
         ui = new Ui();
         storage = new Storage();
