@@ -32,6 +32,7 @@ public class Ui {
         System.out.print(getGoodbyeMessage());
     }
 
+    /** Prints the XMOKE ASCII logo to stdout. */
     public void showLogo() {
         String logo =
                 "__  __ __  __  ___  _  __ _____\n"
@@ -55,7 +56,8 @@ public class Ui {
     }
 
     public String getSortSuccessMessage() {
-        return LINE_SEPARATOR + "\nTasks sorted by deadline (tasks without deadline at the end).\n" + LINE_SEPARATOR + "\n";
+        return LINE_SEPARATOR + "\nTasks sorted by deadline (tasks without deadline at the end).\n"
+                + LINE_SEPARATOR + "\n";
     }
 
     public void showSortSuccess() {
@@ -95,7 +97,8 @@ public class Ui {
     }
 
     public String getTaskMarkedMessage(Task task) {
-        return LINE_SEPARATOR + "\nNice! I've marked this task as done:\n  " + task + "\n" + LINE_SEPARATOR + "\n";
+        return LINE_SEPARATOR + "\nNice! I've marked this task as done:\n  " + task + "\n"
+                + LINE_SEPARATOR + "\n";
     }
 
     public void showTaskMarked(Task task) {
@@ -103,7 +106,8 @@ public class Ui {
     }
 
     public String getTaskUnmarkedMessage(Task task) {
-        return LINE_SEPARATOR + "\nNice! I've marked this task as not done yet:\n  " + task + "\n" + LINE_SEPARATOR + "\n";
+        return LINE_SEPARATOR + "\nNice! I've marked this task as not done yet:\n  " + task + "\n"
+                + LINE_SEPARATOR + "\n";
     }
 
     public void showTaskUnmarked(Task task) {

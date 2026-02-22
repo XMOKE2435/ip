@@ -9,6 +9,9 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
+/**
+ * Main JavaFX application for the XMOKE chatbot GUI.
+ */
 public class MainApp extends Application {
     private xmoke.Xmoke xmoke = new xmoke.Xmoke();
 
@@ -43,6 +46,7 @@ public class MainApp extends Application {
                 }
             }
         } catch (Exception ignored) {
+            // Use fallback image below
         }
         WritableImage fallback = new WritableImage(100, 100);
         var pw = fallback.getPixelWriter();

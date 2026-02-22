@@ -11,13 +11,15 @@ import java.util.stream.Collectors;
  */
 
 public class TaskList {
-    private ArrayList<Task> tasks;
     private static final int MAX_TASKS = 100;
+    private ArrayList<Task> tasks;
 
+    /** Creates an empty task list. */
     public TaskList() {
         this.tasks = new ArrayList<>();
     }
 
+    /** Adds a task; throws if list is full. */
     public void addTask(Task task) {
         if (tasks.size() >= MAX_TASKS) {
             throw new IllegalStateException("Task list is full!");
@@ -64,6 +66,7 @@ public class TaskList {
                 .collect(Collectors.toCollection(ArrayList::new));
     }
 
+    /** Returns tasks whose description contains the keyword (case-insensitive). */
     public ArrayList<Task> findTasks(String keyword) {
         String needle = keyword.trim().toLowerCase();
         return tasks.stream()

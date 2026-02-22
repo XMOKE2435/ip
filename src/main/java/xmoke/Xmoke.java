@@ -1,16 +1,12 @@
 package xmoke;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeParseException;
-import java.util.ArrayList;
 
 /**
  * Entry point of the XMOKE chatbot application.
  * Handles the program startup flow and delegates user interactions to other components.
  */
-
-
 public class Xmoke {
     private Storage storage;
     private TaskList tasks;
@@ -193,6 +189,7 @@ public class Xmoke {
         return ui.getErrorMessage("OOPS!!! I'm sorry, but I don't know what that means :-(");
     }
 
+    /** Runs the text-based UI loop (read command, process, repeat until bye). */
     public void run() {
         ui.showLogo();
         ui.showWelcome();

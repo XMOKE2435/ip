@@ -95,8 +95,7 @@ public class Storage {
     /**
      * Saves the given tasks to disk.
      *
-     * @param tasks Tasks to be saved.
-     * @throws IOException If writing to the file fails.
+     * @param taskList Task list to save.
      */
 
     public void saveTasks(TaskList taskList) {
@@ -126,5 +125,4 @@ public class Storage {
             return "Keep going — you’re doing great!";
         }
     }
-
 }

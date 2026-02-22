@@ -79,6 +79,7 @@ public class Parser {
         }
     }
 
+    /** Parses a date string (yyyy-MM-dd or d/M/yyyy). */
     public static LocalDate parseDate(String dateStr) throws DateTimeParseException {
         dateStr = dateStr.trim();
 

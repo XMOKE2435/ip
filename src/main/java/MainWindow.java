@@ -24,6 +24,7 @@ public class MainWindow extends AnchorPane {
     private Image userImage;
     private Image dukeImage;
 
+    /** Initializes the scroll pane and binds scroll position to bottom. */
     @FXML
     public void initialize() {
         scrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);

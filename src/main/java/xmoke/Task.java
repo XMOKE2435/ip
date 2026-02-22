@@ -8,8 +8,8 @@ import java.util.Locale;
  * Represents a task in the chatbot, including its type, description, completion status,
  * and optional date/time fields (deadline or event timing).
  */
-
 public class Task {
+    /** Task type: T = todo, D = deadline, E = event. */
     public enum TaskType {
         T, D, E
     }
@@ -19,6 +19,7 @@ public class Task {
     private TaskType type;
     private LocalDateTime dateTime; // For deadlines and events
 
+    /** Creates a todo/deadline/event with no date/time. */
     public Task(String description, TaskType type) {
         assert description != null : "task description must not be null";
         this.description = description;
@@ -27,6 +28,7 @@ public class Task {
         this.dateTime = null;
     }
 
+    /** Creates a task with given description, type and done status; no date/time. */
     public Task(String description, TaskType type, boolean isDone) {
         this.description = description;
         this.type = type;
@@ -34,7 +36,7 @@ public class Task {
         this.dateTime = null;
     }
 
-    // Constructor with date/time
+    /** Creates a task with date/time (deadline or event). */
     public Task(String description, TaskType type, LocalDateTime dateTime) {
         this.description = description;
         this.type = type;
@@ -42,7 +44,7 @@ public class Task {
         this.dateTime = dateTime;
     }
 
-    // Constructor with all parameters
+    /** Creates a task with all fields. */
     public Task(String description, TaskType type, boolean isDone, LocalDateTime dateTime) {
         this.description = description;
         this.type = type;
@@ -97,6 +99,7 @@ public class Task {
         return sb.toString();
     }
 
+    /** Returns a single-line string for saving to file. */
     public String toFileFormat() {
         String doneFlag = isDone ? "1" : "0";
         StringBuilder sb = new StringBuilder();
