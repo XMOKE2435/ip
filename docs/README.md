@@ -1,20 +1,20 @@
 # xmoke.Xmoke User Guide
 
-// Update the title above to match the actual product name
+<!-- Update the title above to match the actual product name -->
 
-// Product screenshot goes here
+<!-- Product screenshot goes here -->
 
-// Product intro goes here
+<!-- Product intro goes here -->
 
 ## Adding deadlines
 
-// Describe the action and its outcome.
+<!-- Describe the action and its outcome. -->
 
-// Give examples of usage
+<!-- Give examples of usage -->
 
 Example: `keyword (optional arguments)`
 
-// A description of the expected outcome goes here
+<!-- A description of the expected outcome goes here -->
 
 ```
 expected output
@@ -22,9 +22,9 @@ expected output
 
 ## Feature ABC
 
-// Feature details
+<!-- Feature details -->
 
 
 ## Feature XYZ
 
-// Feature details
+<!-- Feature details -->
